@@ -1,0 +1,164 @@
+@model GocPho.Models.Product
+@{
+    ViewData["Title"] = "Thêm sản phẩm mới";
+    Layout = "_AdminLayout";
+    var categories = ViewBag.Categories as List<GocPho.Models.Category>;
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0">
+                        <i class="fas fa-plus-circle me-2"></i>Thêm sản phẩm mới
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateProduct" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Name" class="form-label">Tên sản phẩm *</label>
+                                <input asp-for="Name" class="form-control" placeholder="Nhập tên sản phẩm">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="CategoryId" class="form-label">Danh mục *</label>
+                                <select asp-for="CategoryId" class="form-select">
+                                    <option value="">-- Chọn danh mục --</option>
+                                    @if (categories != null)
+                                    {
+                                        @foreach (var category in categories)
+                                        {
+                                            <option value="@category.Id">@category.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Price" class="form-label">Giá (VNĐ) *</label>
+                                <input asp-for="Price" class="form-control" type="number" min="0" step="1000" placeholder="Nhập giá sản phẩm">
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ImageUrl" class="form-label">URL hình ảnh</label>
+                                <input asp-for="ImageUrl" class="form-control" placeholder="Nhập URL hình ảnh hoặc để trống">
+                                <small class="form-text text-muted">Để trống sẽ sử dụng hình ảnh mặc định</small>
+                                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Mô tả sản phẩm</label>
+                            <textarea asp-for="Description" class="form-control" rows="3" placeholder="Nhập mô tả chi tiết về sản phẩm"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input asp-for="IsAvailable" class="form-check-input" checked>
+                                <label asp-for="IsAvailable" class="form-check-label">
+                                    Sản phẩm có sẵn
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="@Url.Action("Products", "Admin")" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-save me-2"></i>Lưu sản phẩm
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Preview Card -->
+            <div class="card shadow-sm border-0 mt-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-eye me-2"></i>Xem trước sản phẩm
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img id="previewImage" src="/images/default-coffee.svg" alt="Preview" 
+                                 class="img-fluid rounded" style="height: 200px; width: 100%; object-fit: cover;">
+                        </div>
+                        <div class="col-md-8">
+                            <h5 id="previewName">Tên sản phẩm</h5>
+                            <p id="previewDescription" class="text-muted">Mô tả sản phẩm sẽ hiển thị ở đây...</p>
+                            <p class="mb-2">
+                                <span class="badge bg-secondary" id="previewCategory">Danh mục</span>
+                            </p>
+                            <h4 class="text-warning" id="previewPrice">0 VNĐ</h4>
+                            <span class="badge bg-success" id="previewStatus">Có sẵn</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            // Update preview when form fields change
+            $('#Name').on('input', function() {
+                $('#previewName').text($(this).val() || 'Tên sản phẩm');
+            });
+
+            $('#Description').on('input', function() {
+                $('#previewDescription').text($(this).val() || 'Mô tả sản phẩm sẽ hiển thị ở đây...');
+            });
+
+            $('#Price').on('input', function() {
+                var price = $(this).val();
+                if (price) {
+                    $('#previewPrice').text(parseInt(price).toLocaleString('vi-VN') + ' VNĐ');
+                } else {
+                    $('#previewPrice').text('0 VNĐ');
+                }
+            });
+
+            $('#CategoryId').on('change', function() {
+                var selectedText = $(this).find('option:selected').text();
+                $('#previewCategory').text(selectedText === '-- Chọn danh mục --' ? 'Danh mục' : selectedText);
+            });
+
+            $('#ImageUrl').on('input', function() {
+                var url = $(this).val();
+                if (url) {
+                    $('#previewImage').attr('src', url);
+                } else {
+                    $('#previewImage').attr('src', '/images/default-coffee.svg');
+                }
+            });
+
+            $('#IsAvailable').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#previewStatus').removeClass('bg-danger').addClass('bg-success').text('Có sẵn');
+                } else {
+                    $('#previewStatus').removeClass('bg-success').addClass('bg-danger').text('Hết hàng');
+                }
+            });
+
+            // Handle image load error
+            $('#previewImage').on('error', function() {
+                $(this).attr('src', '/images/default-coffee.svg');
+            });
+        });
+    </script>
+}

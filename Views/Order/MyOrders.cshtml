@@ -1,0 +1,347 @@
+@model List<GocPho.Models.Order>
+
+@{
+    ViewData["Title"] = "Đơn hàng của tôi";
+}
+
+<style>
+    .orders-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 40px 0;
+        background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+        color: white;
+        border-radius: 15px;
+    }
+
+    .page-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .page-header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    .orders-grid {
+        display: grid;
+        gap: 20px;
+    }
+
+    .order-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .order-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .order-header {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 20px;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .order-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .order-number {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #8B4513;
+    }
+
+    .order-date {
+        color: #6c757d;
+        font-size: 0.95rem;
+    }
+
+    .order-status {
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .status-pending {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeaa7;
+    }
+
+    .status-confirmed {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+    }
+
+    .status-preparing {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .status-delivering {
+        background-color: #cce5ff;
+        color: #004085;
+        border: 1px solid #99d6ff;
+    }
+
+    .status-delivered {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .status-cancelled {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .order-body {
+        padding: 20px;
+    }
+
+    .order-items {
+        margin-bottom: 20px;
+    }
+
+    .order-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #f8f9fa;
+    }
+
+    .order-item:last-child {
+        border-bottom: none;
+    }
+
+    .item-info {
+        flex: 1;
+    }
+
+    .item-name {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .item-details {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    .item-price {
+        font-weight: 600;
+        color: #8B4513;
+    }
+
+    .order-total {
+        text-align: right;
+        padding-top: 15px;
+        border-top: 2px solid #8B4513;
+    }
+
+    .total-amount {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #8B4513;
+    }
+
+    .order-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        margin-top: 15px;
+    }
+
+    .btn-details {
+        background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-details:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        color: white;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .empty-icon {
+        font-size: 4rem;
+        color: #dee2e6;
+        margin-bottom: 20px;
+    }
+
+    .empty-title {
+        font-size: 1.5rem;
+        color: #6c757d;
+        margin-bottom: 10px;
+    }
+
+    .empty-text {
+        color: #adb5bd;
+        margin-bottom: 30px;
+    }
+
+    .btn-shop {
+        background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-shop:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        color: white;
+    }
+
+    @@media (max-width: 768px) {
+        .orders-container {
+            padding: 10px;
+        }
+
+        .page-header {
+            padding: 30px 20px;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+        }
+
+        .order-info {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .order-actions {
+            justify-content: center;
+        }
+    }
+</style>
+
+<div class="orders-container">
+    <div class="page-header">
+        <h1>📋 Đơn hàng của tôi</h1>
+        <p>Theo dõi tình trạng và lịch sử đặt hàng của bạn</p>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="orders-grid">
+            @foreach (var order in Model)
+            {
+                <div class="order-card">
+                    <div class="order-header">
+                        <div class="order-info">
+                            <div>
+                                <div class="order-number">Đơn hàng #@order.Id</div>
+                                <div class="order-date">@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</div>
+                            </div>
+                            <div class="order-status status-@order.Status.ToString().ToLower()">
+                                @switch (order.Status)
+                                {
+                                    case GocPho.Models.OrderStatus.Pending:
+                                        <span>⏳ Chờ xác nhận</span>
+                                        break;
+                                    case GocPho.Models.OrderStatus.Confirmed:
+                                        <span>✅ Đã xác nhận</span>
+                                        break;
+                                    case GocPho.Models.OrderStatus.Preparing:
+                                        <span>👨‍🍳 Đang chuẩn bị</span>
+                                        break;
+                                    case GocPho.Models.OrderStatus.Delivering:
+                                        <span>🚚 Đang giao hàng</span>
+                                        break;
+                                    case GocPho.Models.OrderStatus.Delivered:
+                                        <span>🎉 Hoàn thành</span>
+                                        break;
+                                    case GocPho.Models.OrderStatus.Cancelled:
+                                        <span>❌ Đã hủy</span>
+                                        break;
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-body">
+                        <div class="order-items">
+                            @foreach (var item in order.OrderItems)
+                            {
+                                <div class="order-item">
+                                    <div class="item-info">
+                                        <div class="item-name">@item.Product?.Name</div>
+                                        <div class="item-details">Số lượng: @item.Quantity</div>
+                                    </div>
+                                    <div class="item-price">@((item.UnitPrice * item.Quantity).ToString("N0")) VNĐ</div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="order-total">
+                            <div class="total-amount">Tổng cộng: @order.TotalAmount.ToString("N0") VNĐ</div>
+                        </div>
+
+                        <div class="order-actions">
+                            <a href="@Url.Action("Details", new { id = order.Id })" class="btn-details">
+                                📄 Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">
+            <div class="empty-icon">📦</div>
+            <h3 class="empty-title">Chưa có đơn hàng nào</h3>
+            <p class="empty-text">Bạn chưa đặt đơn hàng nào. Hãy khám phá menu và đặt hàng ngay!</p>
+            <a href="@Url.Action("Menu", "Product")" class="btn-shop">
+                ☕ Đặt hàng ngay
+            </a>
+        </div>
+    }
+</div>

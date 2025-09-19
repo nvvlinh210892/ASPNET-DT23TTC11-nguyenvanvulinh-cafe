@@ -1,0 +1,23 @@
+# Build outputs
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Sensitive files
+# ADMIN_ACCOUNT_INFO.txt
+# WEBSITE_STATUS.txt
+
+# Development config (may contain secrets)
+appsettings.Development.json
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db

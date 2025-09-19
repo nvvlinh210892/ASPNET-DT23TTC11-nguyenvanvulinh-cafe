@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="cupGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A0522D;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="coffeeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D2691E;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="foamGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFAF0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F5DEB3;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="200" cy="200" r="190" fill="#FFF8DC" stroke="#D2B48C" stroke-width="4"/>
+  
+  <!-- Saucer -->
+  <ellipse cx="200" cy="320" rx="80" ry="15" fill="url(#cupGradient)"/>
+  
+  <!-- Cup -->
+  <path d="M 140 320 Q 140 280 150 240 L 250 240 Q 260 280 260 320 Z" fill="url(#cupGradient)" stroke="#654321" stroke-width="2"/>
+  
+  <!-- Handle -->
+  <path d="M 260 280 Q 290 280 290 300 Q 290 320 260 320" fill="none" stroke="#654321" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Coffee -->
+  <path d="M 150 240 Q 150 245 155 250 L 245 250 Q 250 245 250 240 Z" fill="url(#coffeeGradient)"/>
+  
+  <!-- Foam -->
+  <ellipse cx="200" cy="245" rx="45" ry="8" fill="url(#foamGradient)"/>
+  
+  <!-- Foam art - heart -->
+  <path d="M 190 240 Q 185 235 180 240 Q 175 245 180 250 L 190 260 L 200 250 Q 205 245 200 240 Q 195 235 190 240 Z" fill="#8B4513"/>
+  
+  <!-- Steam -->
+  <path d="M 180 220 Q 175 210 180 200 Q 185 190 180 180" fill="none" stroke="#E6E6FA" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 200 225 Q 195 215 200 205 Q 205 195 200 185" fill="none" stroke="#E6E6FA" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 220 220 Q 215 210 220 200 Q 225 190 220 180" fill="none" stroke="#E6E6FA" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  
+  <!-- Coffee beans decoration -->
+  <g transform="translate(80,100)">
+    <ellipse cx="0" cy="0" rx="8" ry="12" fill="#8B4513" transform="rotate(15)"/>
+    <line x1="0" y1="-8" x2="0" y2="8" stroke="#654321" stroke-width="1"/>
+  </g>
+  
+  <g transform="translate(320,120)">
+    <ellipse cx="0" cy="0" rx="8" ry="12" fill="#8B4513" transform="rotate(-20)"/>
+    <line x1="0" y1="-8" x2="0" y2="8" stroke="#654321" stroke-width="1"/>
+  </g>
+  
+  <g transform="translate(100,300)">
+    <ellipse cx="0" cy="0" rx="6" ry="9" fill="#8B4513" transform="rotate(45)"/>
+    <line x1="0" y1="-6" x2="0" y2="6" stroke="#654321" stroke-width="1"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="200" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#8B4513">Cappuccino</text>
+</svg>

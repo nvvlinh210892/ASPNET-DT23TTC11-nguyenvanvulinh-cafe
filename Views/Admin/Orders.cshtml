@@ -1,0 +1,281 @@
+@model List<GocPho.Models.Order>
+@{
+    ViewData["Title"] = "Quản lý đơn hàng";
+    Layout = "_AdminLayout";
+    var currentStatus = ViewBag.CurrentStatus as GocPho.Models.OrderStatus?;
+}
+
+<!-- Filter Section -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow border-0">
+            <div class="card-header" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">
+                <h5 class="mb-0 text-white">
+                    <i class="fas fa-filter me-2"></i>Lọc đơn hàng
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-2">
+                        <a href="@Url.Action("Orders", "Admin")" 
+                           class="btn @(currentStatus == null ? "btn-warning" : "btn-outline-warning") w-100">
+                            <i class="fas fa-list me-1"></i>Tất cả
+                            <span class="badge bg-light text-dark ms-1">@Model.Count</span>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="@Url.Action("Orders", "Admin", new { status = GocPho.Models.OrderStatus.Pending })" 
+                           class="btn @(currentStatus == GocPho.Models.OrderStatus.Pending ? "btn-danger" : "btn-outline-danger") w-100">
+                            <i class="fas fa-clock me-1"></i>Chờ xác nhận
+                            <span class="badge bg-light text-dark ms-1">@Model.Count(o => o.Status == GocPho.Models.OrderStatus.Pending)</span>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="@Url.Action("Orders", "Admin", new { status = GocPho.Models.OrderStatus.Confirmed })" 
+                           class="btn @(currentStatus == GocPho.Models.OrderStatus.Confirmed ? "btn-info" : "btn-outline-info") w-100">
+                            <i class="fas fa-check me-1"></i>Đã xác nhận
+                            <span class="badge bg-light text-dark ms-1">@Model.Count(o => o.Status == GocPho.Models.OrderStatus.Confirmed)</span>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="@Url.Action("Orders", "Admin", new { status = GocPho.Models.OrderStatus.Preparing })" 
+                           class="btn @(currentStatus == GocPho.Models.OrderStatus.Preparing ? "btn-primary" : "btn-outline-primary") w-100">
+                            <i class="fas fa-cog me-1"></i>Đang chuẩn bị
+                            <span class="badge bg-light text-dark ms-1">@Model.Count(o => o.Status == GocPho.Models.OrderStatus.Preparing)</span>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="@Url.Action("Orders", "Admin", new { status = GocPho.Models.OrderStatus.Delivering })" 
+                           class="btn @(currentStatus == GocPho.Models.OrderStatus.Delivering ? "btn-warning" : "btn-outline-warning") w-100">
+                            <i class="fas fa-truck me-1"></i>Đang giao
+                            <span class="badge bg-light text-dark ms-1">@Model.Count(o => o.Status == GocPho.Models.OrderStatus.Delivering)</span>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="@Url.Action("Orders", "Admin", new { status = GocPho.Models.OrderStatus.Delivered })" 
+                           class="btn @(currentStatus == GocPho.Models.OrderStatus.Delivered ? "btn-success" : "btn-outline-success") w-100">
+                            <i class="fas fa-check-circle me-1"></i>Đã giao
+                            <span class="badge bg-light text-dark ms-1">@Model.Count(o => o.Status == GocPho.Models.OrderStatus.Delivered)</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Orders Table -->
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow border-0">
+            <div class="card-header bg-light">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-shopping-cart me-2 text-warning"></i>
+                        @if (currentStatus.HasValue)
+                        {
+                            <text>Đơn hàng - @switch (currentStatus.Value)
+                            {
+                                case GocPho.Models.OrderStatus.Pending: <text>Chờ xác nhận</text> break;
+                                case GocPho.Models.OrderStatus.Confirmed: <text>Đã xác nhận</text> break;
+                                case GocPho.Models.OrderStatus.Preparing: <text>Đang chuẩn bị</text> break;
+                                case GocPho.Models.OrderStatus.Delivering: <text>Đang giao hàng</text> break;
+                                case GocPho.Models.OrderStatus.Delivered: <text>Đã giao hàng</text> break;
+                                case GocPho.Models.OrderStatus.Cancelled: <text>Đã hủy</text> break;
+                            }</text>
+                        }
+                        else
+                        {
+                            <text>Tất cả đơn hàng</text>
+                        }
+                    </h5>
+                    <span class="badge bg-warning text-dark fs-6">@Model.Count đơn hàng</span>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                @if (Model.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th>Mã đơn</th>
+                                    <th>Khách hàng</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái</th>
+                                    <th class="text-center">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in Model)
+                                {
+                                    <tr>
+                                        <td class="fw-bold text-primary">#@order.Id</td>
+                                        <td>
+                                            <div>
+                                                <strong>@order.CustomerName</strong>
+                                                <br>
+                                                <small class="text-muted">
+                                                    <i class="fas fa-phone me-1"></i>@order.PhoneNumber
+                                                </small>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                @order.OrderDate.ToString("dd/MM/yyyy")
+                                                <br>
+                                                <small class="text-muted">@order.OrderDate.ToString("HH:mm")</small>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <small>
+                                                @foreach (var item in order.OrderItems.Take(2))
+                                                {
+                                                    <div>@item.Product.Name x@item.Quantity</div>
+                                                }
+                                                @if (order.OrderItems.Count > 2)
+                                                {
+                                                    <div class="text-muted">+@(order.OrderItems.Count - 2) sản phẩm khác</div>
+                                                }
+                                            </small>
+                                        </td>
+                                        <td class="fw-bold text-success">@order.TotalAmount.ToString("N0") VNĐ</td>
+                                        <td>
+                                            <span class="badge status-@order.Status.ToString().ToLower() fs-6">
+                                                @switch (order.Status)
+                                                {
+                                                    case GocPho.Models.OrderStatus.Pending:
+                                                        <text>Chờ xác nhận</text>
+                                                        break;
+                                                    case GocPho.Models.OrderStatus.Confirmed:
+                                                        <text>Đã xác nhận</text>
+                                                        break;
+                                                    case GocPho.Models.OrderStatus.Preparing:
+                                                        <text>Đang chuẩn bị</text>
+                                                        break;
+                                                    case GocPho.Models.OrderStatus.Delivering:
+                                                        <text>Đang giao hàng</text>
+                                                        break;
+                                                    case GocPho.Models.OrderStatus.Delivered:
+                                                        <text>Đã giao hàng</text>
+                                                        break;
+                                                    case GocPho.Models.OrderStatus.Cancelled:
+                                                        <text>Đã hủy</text>
+                                                        break;
+                                                }
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="btn-group" role="group">
+                                                <a href="@Url.Action("OrderDetails", "Admin", new { id = order.Id })" 
+                                                   class="btn btn-sm btn-outline-info" title="Xem chi tiết">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                @if (order.Status != GocPho.Models.OrderStatus.Delivered && order.Status != GocPho.Models.OrderStatus.Cancelled)
+                                                {
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-sm btn-outline-warning dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            @if (order.Status == GocPho.Models.OrderStatus.Pending)
+                                                            {
+                                                                <li>
+                                                                    <form method="post" asp-action="UpdateOrderStatus" class="d-inline">
+                                                                        <input type="hidden" name="orderId" value="@order.Id" />
+                                                                        <input type="hidden" name="status" value="@((int)GocPho.Models.OrderStatus.Confirmed)" />
+                                                                        <button type="submit" class="dropdown-item">
+                                                                            <i class="fas fa-check text-info me-2"></i>Xác nhận
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                            }
+                                                            @if (order.Status == GocPho.Models.OrderStatus.Confirmed)
+                                                            {
+                                                                <li>
+                                                                    <form method="post" asp-action="UpdateOrderStatus" class="d-inline">
+                                                                        <input type="hidden" name="orderId" value="@order.Id" />
+                                                                        <input type="hidden" name="status" value="@((int)GocPho.Models.OrderStatus.Preparing)" />
+                                                                        <button type="submit" class="dropdown-item">
+                                                                            <i class="fas fa-cog text-primary me-2"></i>Chuẩn bị
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                            }
+                                                            @if (order.Status == GocPho.Models.OrderStatus.Preparing)
+                                                            {
+                                                                <li>
+                                                                    <form method="post" asp-action="UpdateOrderStatus" class="d-inline">
+                                                                        <input type="hidden" name="orderId" value="@order.Id" />
+                                                                        <input type="hidden" name="status" value="@((int)GocPho.Models.OrderStatus.Delivering)" />
+                                                                        <button type="submit" class="dropdown-item">
+                                                                            <i class="fas fa-truck text-warning me-2"></i>Giao hàng
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                            }
+                                                            @if (order.Status == GocPho.Models.OrderStatus.Delivering)
+                                                            {
+                                                                <li>
+                                                                    <form method="post" asp-action="UpdateOrderStatus" class="d-inline">
+                                                                        <input type="hidden" name="orderId" value="@order.Id" />
+                                                                        <input type="hidden" name="status" value="@((int)GocPho.Models.OrderStatus.Delivered)" />
+                                                                        <button type="submit" class="dropdown-item">
+                                                                            <i class="fas fa-check-circle text-success me-2"></i>Hoàn thành
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                            }
+                                                            <li><hr class="dropdown-divider"></li>
+                                                            <li>
+                                                                <form method="post" asp-action="UpdateOrderStatus" class="d-inline">
+                                                                    <input type="hidden" name="orderId" value="@order.Id" />
+                                                                    <input type="hidden" name="status" value="@((int)GocPho.Models.OrderStatus.Cancelled)" />
+                                                                    <button type="submit" class="dropdown-item text-danger">
+                                                                        <i class="fas fa-times me-2"></i>Hủy đơn
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center py-5">
+                        <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">Không có đơn hàng nào</h5>
+                        <p class="text-muted">
+                            @if (currentStatus.HasValue)
+                            {
+                                <text>Không có đơn hàng nào với trạng thái này.</text>
+                            }
+                            else
+                            {
+                                <text>Chưa có đơn hàng nào được tạo.</text>
+                            }
+                        </p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .status-pending { background-color: #dc3545; }
+    .status-confirmed { background-color: #17a2b8; }
+    .status-preparing { background-color: #007bff; }
+    .status-delivering { background-color: #ffc107; color: #000; }
+    .status-delivered { background-color: #28a745; }
+    .status-cancelled { background-color: #6c757d; }
+</style>

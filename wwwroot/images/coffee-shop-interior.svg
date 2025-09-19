@@ -1,0 +1,24 @@
+<svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shopGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D2691E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F4A460;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="500" height="300" fill="url(#shopGradient)"/>
+  
+  <!-- Coffee shop interior elements -->
+  <rect x="50" y="200" width="400" height="80" fill="#8B4513" opacity="0.3"/>
+  <circle cx="150" cy="150" r="40" fill="#FFFFFF" opacity="0.2"/>
+  <circle cx="350" cy="120" r="30" fill="#FFFFFF" opacity="0.2"/>
+  
+  <!-- Coffee cups -->
+  <text x="120" y="160" font-family="Arial, sans-serif" font-size="30" fill="white">☕</text>
+  <text x="320" y="130" font-family="Arial, sans-serif" font-size="24" fill="white">☕</text>
+  <text x="400" y="180" font-family="Arial, sans-serif" font-size="20" fill="white">☕</text>
+  
+  <!-- Main text -->
+  <text x="250" y="160" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">Góc phố Coffee</text>
+  <text x="250" y="190" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle" opacity="0.9">Không gian ấm cúng</text>
+</svg>

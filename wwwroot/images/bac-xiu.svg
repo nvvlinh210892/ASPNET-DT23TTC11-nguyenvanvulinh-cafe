@@ -1,0 +1,35 @@
+<svg width="300" height="250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bacxiuGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5DEB3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DEB887;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bacxiuLayer" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#F5DEB3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D2691E;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="300" height="250" fill="url(#bacxiuGradient)"/>
+  
+  <!-- Glass -->
+  <rect x="100" y="80" width="100" height="120" fill="#FFFFFF" opacity="0.1" rx="5"/>
+  <rect x="105" y="85" width="90" height="110" fill="url(#bacxiuLayer)" opacity="0.9" rx="3"/>
+  
+  <!-- Ice cubes -->
+  <rect x="115" y="95" width="15" height="15" fill="#FFFFFF" opacity="0.8" rx="2"/>
+  <rect x="140" y="110" width="12" height="12" fill="#FFFFFF" opacity="0.7" rx="2"/>
+  <rect x="165" y="100" width="14" height="14" fill="#FFFFFF" opacity="0.8" rx="2"/>
+  
+  <!-- Extra milk foam -->
+  <ellipse cx="150" cy="88" rx="42" ry="10" fill="#FFFFFF" opacity="0.9"/>
+  <ellipse cx="150" cy="85" rx="35" ry="6" fill="#FFFFFF" opacity="0.7"/>
+  
+  <!-- Steam -->
+  <path d="M 125 75 Q 120 65 125 55" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.6"/>
+  <path d="M 150 75 Q 155 65 150 55" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.6"/>
+  <path d="M 175 75 Q 170 65 175 55" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.6"/>
+  
+  <!-- Text -->
+  <text x="150" y="230" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#8B4513" text-anchor="middle">Bạc xỉu</text>
+</svg>

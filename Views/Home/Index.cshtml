@@ -1,0 +1,196 @@
+﻿@model GocPho.Models.HomeViewModel
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<!-- Hero Section -->
+<section class="hero-section bg-dark text-white py-5 mb-5" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/coffee-cover.webp') center/cover; min-height: 100vh;">
+    <div class="container">
+        <div class="row align-items-center" style="min-height: 90vh;">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-2 fw-bold mb-4 text-shadow">
+                    Chào mừng đến với <span class="text-warning">Góc phố Coffee</span>
+                </h1>
+                <p class="lead mb-5 fs-3 text-shadow">
+                    Thưởng thức hương vị cà phê đậm đà, được pha chế từ những hạt cà phê chất lượng cao nhất.
+                    Giao hàng tận nơi, nhanh chóng và tiện lợi.
+                </p>
+                <div class="d-flex gap-4 justify-content-center flex-wrap">
+                    <a href="@Url.Action("Menu", "Product")" class="btn btn-warning btn-lg px-5 py-3 fs-5 shadow">
+                        <i class="fas fa-coffee me-2"></i>Xem Menu
+                    </a>
+                    <a href="@Url.Action("Contact", "Home")" class="btn btn-outline-light btn-lg px-5 py-3 fs-5 shadow">
+                        <i class="fas fa-phone me-2"></i>Đặt hàng ngay
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="display-5 fw-bold mb-3">Tại sao chọn Góc phố Coffee?</h2>
+                <p class="lead text-muted">Chúng tôi cam kết mang đến cho bạn trải nghiệm cà phê tuyệt vời nhất</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="text-center p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-shipping-fast fa-3x text-warning"></i>
+                    </div>
+                    <h4>Giao hàng nhanh</h4>
+                    <p class="text-muted">Giao hàng trong vòng 30 phút trong khu vực nội thành</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-award fa-3x text-warning"></i>
+                    </div>
+                    <h4>Chất lượng cao</h4>
+                    <p class="text-muted">Cà phê được chọn lọc từ những vùng trồng cà phê nổi tiếng</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-heart fa-3x text-warning"></i>
+                    </div>
+                    <h4>Pha chế tận tâm</h4>
+                    <p class="text-muted">Mỗi ly cà phê được pha chế với sự tận tâm và yêu thương</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section class="categories-section py-5 bg-light">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="display-5 fw-bold mb-3">Danh mục sản phẩm</h2>
+                <p class="lead text-muted">Khám phá các loại cà phê đa dạng của chúng tôi</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            @foreach (var category in Model.Categories)
+            {
+                <div class="col-md-3">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-coffee fa-3x text-warning mb-3"></i>
+                            <h5 class="card-title">@category.Name</h5>
+                            <p class="card-text text-muted">@category.Description</p>
+                            <a href="@Url.Action("Menu", "Product", new { categoryId = category.Id })" class="btn btn-outline-warning">
+                                Xem sản phẩm
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="featured-products py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="display-5 fw-bold mb-3">Sản phẩm nổi bật</h2>
+                <p class="lead text-muted">Những ly cà phê được yêu thích nhất tại Góc phố</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            @foreach (var product in Model.FeaturedProducts)
+            {
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 product-card">
+                        <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" style="height: 250px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text text-muted flex-grow-1">@product.Description</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 text-warning mb-0">@product.Price.ToString("N0") VNĐ</span>
+                                @if (User.Identity?.IsAuthenticated == true)
+                                {
+                                    <button class="btn btn-warning btn-add-to-cart" data-product-id="@product.Id">
+                                        <i class="fas fa-cart-plus me-1"></i>Thêm vào giỏ
+                                    </button>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Login", "Account")" class="btn btn-outline-warning">
+                                        Đăng nhập để mua
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center mt-5">
+            <a href="@Url.Action("Menu", "Product")" class="btn btn-warning btn-lg">
+                <i class="fas fa-list me-2"></i>Xem tất cả sản phẩm
+            </a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('.btn-add-to-cart').click(function() {
+                var productId = $(this).data('product-id');
+                var button = $(this);
+
+                button.prop('disabled', true);
+                button.html('<i class="fas fa-spinner fa-spin me-1"></i>Đang thêm...');
+
+                $.post('/Cart/AddToCart', { productId: productId, quantity: 1 })
+                    .done(function(response) {
+                        if (response.success) {
+                            // Show success message
+                            showToast('success', response.message);
+                            // Update cart count
+                            if (window.updateCartCount) {
+                                window.updateCartCount(response.cartCount);
+                            }
+                        } else {
+                            showToast('error', response.message);
+                        }
+                    })
+                    .fail(function() {
+                        showToast('error', 'Có lỗi xảy ra. Vui lòng thử lại.');
+                    })
+                    .always(function() {
+                        button.prop('disabled', false);
+                        button.html('<i class="fas fa-cart-plus me-1"></i>Thêm vào giỏ');
+                    });
+            });
+        });
+
+        function showToast(type, message) {
+            var alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+            var icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+
+            var toast = $('<div class="alert ' + alertClass + ' alert-dismissible fade show position-fixed" style="top: 100px; right: 20px; z-index: 9999;">' +
+                '<i class="fas ' + icon + ' me-2"></i>' + message +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
+                '</div>');
+
+            $('body').append(toast);
+
+            setTimeout(function() {
+                toast.alert('close');
+            }, 3000);
+        }
+    </script>
+}

@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300">
+  <defs>
+    <linearGradient id="bannerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D2691E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F4A460;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="steamGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#E6E6FA;stop-opacity:0.3" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="300" fill="url(#bannerGradient)"/>
+  
+  <!-- Coffee beans pattern -->
+  <g opacity="0.1">
+    <g transform="translate(100,50)">
+      <ellipse cx="0" cy="0" rx="8" ry="12" fill="#654321" transform="rotate(15)"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#3E2723" stroke-width="1"/>
+    </g>
+    <g transform="translate(200,80)">
+      <ellipse cx="0" cy="0" rx="8" ry="12" fill="#654321" transform="rotate(-20)"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#3E2723" stroke-width="1"/>
+    </g>
+    <g transform="translate(300,60)">
+      <ellipse cx="0" cy="0" rx="8" ry="12" fill="#654321" transform="rotate(45)"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#3E2723" stroke-width="1"/>
+    </g>
+    <g transform="translate(400,90)">
+      <ellipse cx="0" cy="0" rx="8" ry="12" fill="#654321" transform="rotate(-10)"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#3E2723" stroke-width="1"/>
+    </g>
+    <g transform="translate(500,70)">
+      <ellipse cx="0" cy="0" rx="8" ry="12" fill="#654321" transform="rotate(30)"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#3E2723" stroke-width="1"/>
+    </g>
+    <g transform="translate(600,50)">
+      <ellipse cx="0" cy="0" rx="8" ry="12" fill="#654321" transform="rotate(-35)"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#3E2723" stroke-width="1"/>
+    </g>
+    <g transform="translate(700,85)">
+      <ellipse cx="0" cy="0" rx="8" ry="12" fill="#654321" transform="rotate(20)"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#3E2723" stroke-width="1"/>
+    </g>
+    <g transform="translate(800,65)">
+      <ellipse cx="0" cy="0" rx="8" ry="12" fill="#654321" transform="rotate(-25)"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#3E2723" stroke-width="1"/>
+    </g>
+    <g transform="translate(900,75)">
+      <ellipse cx="0" cy="0" rx="8" ry="12" fill="#654321" transform="rotate(40)"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#3E2723" stroke-width="1"/>
+    </g>
+    <g transform="translate(1000,55)">
+      <ellipse cx="0" cy="0" rx="8" ry="12" fill="#654321" transform="rotate(-15)"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#3E2723" stroke-width="1"/>
+    </g>
+    <g transform="translate(1100,80)">
+      <ellipse cx="0" cy="0" rx="8" ry="12" fill="#654321" transform="rotate(25)"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#3E2723" stroke-width="1"/>
+    </g>
+  </g>
+  
+  <!-- Coffee cup illustration -->
+  <g transform="translate(150,120)">
+    <ellipse cx="0" cy="60" rx="40" ry="8" fill="#654321" opacity="0.3"/>
+    <path d="M -30 60 Q -30 30 -25 10 L 25 10 Q 30 30 30 60 Z" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+    <path d="M 30 35 Q 50 35 50 50 Q 50 65 30 65" fill="none" stroke="#654321" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="0" cy="15" rx="22" ry="4" fill="#3E2723"/>
+    <ellipse cx="0" cy="12" rx="22" ry="3" fill="#D2B48C"/>
+    
+    <!-- Steam -->
+    <path d="M -10 0 Q -15 -10 -10 -20 Q -5 -30 -10 -40" fill="none" stroke="url(#steamGradient)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 0 -2 Q -5 -12 0 -22 Q 5 -32 0 -42" fill="none" stroke="url(#steamGradient)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 10 0 Q 5 -10 10 -20 Q 15 -30 10 -40" fill="none" stroke="url(#steamGradient)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Main title -->
+  <text x="600" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#FFFFFF" stroke="#654321" stroke-width="1">
+    Menu Góc Phố Coffee
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#FFF8DC" opacity="0.9">
+    Khám phá hương vị cà phê đặc biệt
+  </text>
+  
+  <!-- Coffee cup illustration right -->
+  <g transform="translate(1050,120)">
+    <ellipse cx="0" cy="60" rx="40" ry="8" fill="#654321" opacity="0.3"/>
+    <path d="M -30 60 Q -30 30 -25 10 L 25 10 Q 30 30 30 60 Z" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+    <path d="M -30 35 Q -50 35 -50 50 Q -50 65 -30 65" fill="none" stroke="#654321" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="0" cy="15" rx="22" ry="4" fill="#3E2723"/>
+    <ellipse cx="0" cy="12" rx="22" ry="3" fill="#D2B48C"/>
+    
+    <!-- Steam -->
+    <path d="M -10 0 Q -15 -10 -10 -20 Q -5 -30 -10 -40" fill="none" stroke="url(#steamGradient)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 0 -2 Q -5 -12 0 -22 Q 5 -32 0 -42" fill="none" stroke="url(#steamGradient)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 10 0 Q 5 -10 10 -20 Q 15 -30 10 -40" fill="none" stroke="url(#steamGradient)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Decorative elements -->
+  <circle cx="400" cy="200" r="3" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="450" cy="220" r="2" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="750" cy="210" r="3" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="800" cy="230" r="2" fill="#FFFFFF" opacity="0.5"/>
+  
+  <!-- Bottom wave -->
+  <path d="M 0 250 Q 300 230 600 250 Q 900 270 1200 250 L 1200 300 L 0 300 Z" fill="#654321" opacity="0.2"/>
+</svg>

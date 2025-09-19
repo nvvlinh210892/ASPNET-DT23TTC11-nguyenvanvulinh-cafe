@@ -1,0 +1,285 @@
+@model List<GocPho.Models.Product>
+@{
+    ViewData["Title"] = "Menu cà phê";
+    var categories = ViewBag.Categories as List<GocPho.Models.Category>;
+    var currentCategory = ViewBag.CurrentCategory as int?;
+}
+
+<div class="container-fluid p-0 mb-4">
+    <!-- Banner -->
+    <div class="menu-banner">
+        <img src="/images/menu-banner.svg" alt="Menu Banner" class="w-100" style="height: 200px; object-fit: cover;">
+    </div>
+</div>
+
+<div class="container py-5">
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Thực đơn đặc biệt</h1>
+        <p class="lead text-muted">Khám phá những ly cà phê tuyệt vời của chúng tôi</p>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+                <a href="@Url.Action("Menu", "Product")" 
+                   class="btn @(currentCategory == null ? "btn-warning" : "btn-outline-warning")">
+                    <i class="fas fa-th-large me-1"></i>Tất cả
+                </a>
+                @if (categories != null)
+                {
+                    @foreach (var category in categories)
+                    {
+                        <a href="@Url.Action("Menu", "Product", new { categoryId = category.Id })" 
+                           class="btn @(currentCategory == category.Id ? "btn-warning" : "btn-outline-warning")">
+                            <i class="fas fa-coffee me-1"></i>@category.Name
+                        </a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Grid -->
+    @if (Model.Any())
+    {
+        <div class="row g-4">
+            @foreach (var product in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 shadow-sm border-0 product-card">
+                        <div class="product-image-container">
+                            <img src="@product.ImageUrl" class="card-img-top product-image" alt="@product.Name"
+                                 onerror="this.src='/images/default-coffee.svg'">
+                            <div class="image-overlay">
+                                <i class="fas fa-eye text-white"></i>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">@product.Name</h5>
+                                <span class="badge bg-warning text-dark">@product.Category?.Name</span>
+                            </div>
+                            <p class="card-text text-muted flex-grow-1">@product.Description</p>
+                            <div class="d-flex justify-content-between align-items-center mt-auto">
+                                <span class="h5 text-warning mb-0 fw-bold">@product.Price.ToString("N0") VNĐ</span>
+                                @if (product.IsAvailable)
+                                {
+                                    @if (User.Identity?.IsAuthenticated == true)
+                                    {
+                                        <div class="btn-group">
+                                            <button class="btn btn-warning btn-add-to-cart" data-product-id="@product.Id">
+                                                <i class="fas fa-cart-plus me-1"></i>Thêm vào giỏ
+                                            </button>
+                                            <a href="@Url.Action("Details", "Product", new { id = product.Id })" 
+                                               class="btn btn-outline-warning">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="btn-group">
+                                            <a href="@Url.Action("Login", "Account")" class="btn btn-outline-warning">
+                                                Đăng nhập để mua
+                                            </a>
+                                            <a href="@Url.Action("Details", "Product", new { id = product.Id })" 
+                                               class="btn btn-outline-warning">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Hết hàng</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <i class="fas fa-coffee fa-4x text-muted mb-3"></i>
+            <h3 class="text-muted">Không có sản phẩm nào</h3>
+            <p class="text-muted">Hiện tại chưa có sản phẩm trong danh mục này.</p>
+            <a href="@Url.Action("Menu", "Product")" class="btn btn-warning">
+                <i class="fas fa-arrow-left me-2"></i>Xem tất cả sản phẩm
+            </a>
+        </div>
+    }
+</div>
+
+<style>
+    .menu-banner {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0 0 20px 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .menu-banner img {
+        transition: transform 0.3s ease;
+    }
+
+    .menu-banner:hover img {
+        transform: scale(1.02);
+    }
+
+    .text-primary {
+        color: #8B4513 !important;
+    }
+
+    .product-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+    }
+
+    .product-image-container {
+        position: relative;
+        height: 280px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .product-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .product-card:hover .product-image {
+        transform: scale(1.05);
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .product-card:hover .image-overlay {
+        opacity: 1;
+    }
+
+    .image-overlay i {
+        font-size: 2rem;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+        background: white;
+    }
+
+    .card-title {
+        color: #2c3e50;
+        font-weight: 600;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 20px;
+    }
+
+    .btn-warning {
+        background: linear-gradient(45deg, #f39c12, #e67e22);
+        border: none;
+        border-radius: 25px;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-warning:hover {
+        background: linear-gradient(45deg, #e67e22, #d35400);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4);
+    }
+
+    .btn-outline-warning {
+        border: 2px solid #f39c12;
+        color: #f39c12;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-warning:hover {
+        background: #f39c12;
+        border-color: #f39c12;
+        transform: translateY(-2px);
+    }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('.btn-add-to-cart').click(function() {
+                var productId = $(this).data('product-id');
+                var button = $(this);
+                
+                button.prop('disabled', true);
+                button.html('<i class="fas fa-spinner fa-spin me-1"></i>Đang thêm...');
+                
+                $.post('/Cart/AddToCart', { productId: productId, quantity: 1 })
+                    .done(function(response) {
+                        if (response.success) {
+                            showToast('success', response.message);
+                            if (window.updateCartCount) {
+                                window.updateCartCount(response.cartCount);
+                            }
+                        } else {
+                            showToast('error', response.message);
+                        }
+                    })
+                    .fail(function() {
+                        showToast('error', 'Có lỗi xảy ra. Vui lòng thử lại.');
+                    })
+                    .always(function() {
+                        button.prop('disabled', false);
+                        button.html('<i class="fas fa-cart-plus me-1"></i>Thêm vào giỏ');
+                    });
+            });
+        });
+
+        function showToast(type, message) {
+            var alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+            var icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+            
+            var toast = $('<div class="alert ' + alertClass + ' alert-dismissible fade show position-fixed" style="top: 100px; right: 20px; z-index: 9999;">' +
+                '<i class="fas ' + icon + ' me-2"></i>' + message +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
+                '</div>');
+            
+            $('body').append(toast);
+            
+            setTimeout(function() {
+                toast.alert('close');
+            }, 3000);
+        }
+    </script>
+}

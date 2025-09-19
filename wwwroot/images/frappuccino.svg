@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="glassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E0F6FF;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#B0E0E6;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="frappGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DEB887;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D2B48C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#CD853F;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="whipGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFAF0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F5DEB3;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="strawGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF4757;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="200" cy="200" r="190" fill="#F0F8FF" stroke="#87CEEB" stroke-width="4"/>
+  
+  <!-- Glass base -->
+  <ellipse cx="200" cy="330" rx="60" ry="12" fill="#B0C4DE" opacity="0.6"/>
+  
+  <!-- Glass -->
+  <path d="M 160 330 L 170 180 Q 170 170 180 170 L 220 170 Q 230 170 230 180 L 240 330 Z" fill="url(#glassGradient)" stroke="#4682B4" stroke-width="2"/>
+  
+  <!-- Glass highlight -->
+  <path d="M 175 180 L 180 180 L 185 320 L 180 320 Z" fill="#FFFFFF" opacity="0.4"/>
+  
+  <!-- Frappuccino mixture -->
+  <path d="M 165 320 L 172 200 Q 172 195 175 195 L 225 195 Q 228 195 228 200 L 235 320 Z" fill="url(#frappGradient)"/>
+  
+  <!-- Ice chunks -->
+  <ellipse cx="185" cy="250" rx="8" ry="6" fill="#E0F6FF" opacity="0.8" transform="rotate(15 185 250)"/>
+  <ellipse cx="210" cy="280" rx="6" ry="8" fill="#E0F6FF" opacity="0.8" transform="rotate(-20 210 280)"/>
+  <ellipse cx="195" cy="300" rx="7" ry="5" fill="#E0F6FF" opacity="0.8" transform="rotate(45 195 300)"/>
+  <ellipse cx="220" cy="240" rx="5" ry="7" fill="#E0F6FF" opacity="0.8" transform="rotate(-10 220 240)"/>
+  
+  <!-- Whipped cream -->
+  <ellipse cx="200" cy="190" rx="30" ry="15" fill="url(#whipGradient)"/>
+  <ellipse cx="190" cy="180" rx="20" ry="12" fill="url(#whipGradient)"/>
+  <ellipse cx="210" cy="175" rx="18" ry="10" fill="url(#whipGradient)"/>
+  <ellipse cx="200" cy="165" rx="15" ry="8" fill="url(#whipGradient)"/>
+  
+  <!-- Cherry on top -->
+  <circle cx="200" cy="160" r="8" fill="#FF4757"/>
+  <ellipse cx="198" cy="158" rx="3" ry="2" fill="#FF6B6B"/>
+  <path d="M 200 152 Q 195 148 190 150" fill="none" stroke="#228B22" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Straw -->
+  <rect x="220" y="120" width="8" height="180" fill="url(#strawGradient)" rx="4"/>
+  <rect x="222" y="125" width="4" height="170" fill="#FF8E8E" opacity="0.6"/>
+  
+  <!-- Straw stripes -->
+  <rect x="220" y="130" width="8" height="4" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="220" y="150" width="8" height="4" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="220" y="170" width="8" height="4" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="220" y="190" width="8" height="4" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="220" y="210" width="8" height="4" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="220" y="230" width="8" height="4" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="220" y="250" width="8" height="4" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="220" y="270" width="8" height="4" fill="#FFFFFF" opacity="0.8"/>
+  
+  <!-- Straw bend -->
+  <path d="M 224 120 Q 234 110 244 110 Q 254 110 254 120" fill="none" stroke="url(#strawGradient)" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Decorative elements -->
+  <g transform="translate(80,100)">
+    <circle cx="0" cy="0" r="4" fill="#87CEEB" opacity="0.6"/>
+    <circle cx="10" cy="5" r="3" fill="#87CEEB" opacity="0.4"/>
+    <circle cx="-5" cy="8" r="2" fill="#87CEEB" opacity="0.5"/>
+  </g>
+  
+  <g transform="translate(320,120)">
+    <circle cx="0" cy="0" r="3" fill="#87CEEB" opacity="0.6"/>
+    <circle cx="-8" cy="6" r="4" fill="#87CEEB" opacity="0.4"/>
+    <circle cx="6" cy="-4" r="2" fill="#87CEEB" opacity="0.5"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="200" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#4682B4">Frappuccino</text>
+</svg>

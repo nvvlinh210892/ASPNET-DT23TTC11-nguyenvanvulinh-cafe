@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="cupGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="espressoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3E2723;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1B0000;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cremaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D2B48C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#CD853F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="200" cy="200" r="190" fill="#FFF8DC" stroke="#D2B48C" stroke-width="4"/>
+  
+  <!-- Saucer -->
+  <ellipse cx="200" cy="300" rx="70" ry="12" fill="url(#cupGradient)"/>
+  
+  <!-- Cup -->
+  <path d="M 150 300 Q 150 270 155 250 L 245 250 Q 250 270 250 300 Z" fill="url(#cupGradient)" stroke="#654321" stroke-width="2"/>
+  
+  <!-- Handle -->
+  <path d="M 250 275 Q 275 275 275 290 Q 275 305 250 305" fill="none" stroke="#654321" stroke-width="5" stroke-linecap="round"/>
+  
+  <!-- Espresso -->
+  <ellipse cx="200" cy="255" rx="42" ry="6" fill="url(#espressoGradient)"/>
+  
+  <!-- Crema -->
+  <ellipse cx="200" cy="252" rx="42" ry="4" fill="url(#cremaGradient)"/>
+  
+  <!-- Steam -->
+  <path d="M 185 240 Q 180 230 185 220 Q 190 210 185 200" fill="none" stroke="#E6E6FA" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 200 242 Q 195 232 200 222 Q 205 212 200 202" fill="none" stroke="#E6E6FA" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 215 240 Q 210 230 215 220 Q 220 210 215 200" fill="none" stroke="#E6E6FA" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  
+  <!-- Coffee beans decoration -->
+  <g transform="translate(90,120)">
+    <ellipse cx="0" cy="0" rx="12" ry="18" fill="#8B4513" transform="rotate(20)"/>
+    <line x1="0" y1="-12" x2="0" y2="12" stroke="#654321" stroke-width="2"/>
+  </g>
+  
+  <g transform="translate(310,140)">
+    <ellipse cx="0" cy="0" rx="12" ry="18" fill="#8B4513" transform="rotate(-25)"/>
+    <line x1="0" y1="-12" x2="0" y2="12" stroke="#654321" stroke-width="2"/>
+  </g>
+  
+  <g transform="translate(120,320)">
+    <ellipse cx="0" cy="0" rx="10" ry="15" fill="#8B4513" transform="rotate(60)"/>
+    <line x1="0" y1="-10" x2="0" y2="10" stroke="#654321" stroke-width="1.5"/>
+  </g>
+  
+  <g transform="translate(280,320)">
+    <ellipse cx="0" cy="0" rx="10" ry="15" fill="#8B4513" transform="rotate(-40)"/>
+    <line x1="0" y1="-10" x2="0" y2="10" stroke="#654321" stroke-width="1.5"/>
+  </g>
+  
+  <!-- Decorative elements -->
+  <circle cx="100" cy="180" r="3" fill="#D2B48C" opacity="0.6"/>
+  <circle cx="300" cy="200" r="4" fill="#D2B48C" opacity="0.5"/>
+  <circle cx="80" cy="250" r="2" fill="#D2B48C" opacity="0.7"/>
+  
+  <!-- Title -->
+  <text x="200" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#654321">Espresso</text>
+</svg>

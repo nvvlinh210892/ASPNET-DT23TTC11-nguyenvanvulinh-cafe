@@ -1,0 +1,112 @@
+@model GocPho.Models.Category
+@{
+    ViewData["Title"] = "Tạo danh mục mới";
+    Layout = "_AdminLayout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow border-0">
+            <div class="card-header" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 text-white">
+                        <i class="fas fa-plus me-2"></i>Tạo danh mục mới
+                    </h5>
+                    <a href="@Url.Action("Categories", "Admin")" class="btn btn-light btn-sm">
+                        <i class="fas fa-arrow-left me-1"></i>Quay lại
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateCategory" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label fw-bold">
+                            <i class="fas fa-tag me-1 text-primary"></i>Tên danh mục
+                        </label>
+                        <input asp-for="Name" class="form-control form-control-lg" placeholder="Nhập tên danh mục..." />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label asp-for="Description" class="form-label fw-bold">
+                            <i class="fas fa-align-left me-1 text-info"></i>Mô tả
+                        </label>
+                        <textarea asp-for="Description" class="form-control" rows="4" 
+                                  placeholder="Nhập mô tả cho danh mục (tùy chọn)..."></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                        <div class="form-text">Mô tả sẽ giúp khách hàng hiểu rõ hơn về danh mục sản phẩm.</div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="@Url.Action("Categories", "Admin")" class="btn btn-outline-secondary me-md-2">
+                            <i class="fas fa-times me-1"></i>Hủy
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i>Tạo danh mục
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Preview Card -->
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-light">
+                <h6 class="mb-0">
+                    <i class="fas fa-eye me-2 text-success"></i>Xem trước
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="category-preview-icon me-3">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <div>
+                        <h6 class="mb-1" id="preview-name">Tên danh mục sẽ hiển thị ở đây</h6>
+                        <p class="text-muted mb-0" id="preview-description">Mô tả danh mục sẽ hiển thị ở đây</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .category-preview-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const nameInput = document.getElementById('Name');
+        const descriptionInput = document.getElementById('Description');
+        const previewName = document.getElementById('preview-name');
+        const previewDescription = document.getElementById('preview-description');
+        
+        function updatePreview() {
+            const name = nameInput.value.trim();
+            const description = descriptionInput.value.trim();
+            
+            previewName.textContent = name || 'Tên danh mục sẽ hiển thị ở đây';
+            previewDescription.textContent = description || 'Mô tả danh mục sẽ hiển thị ở đây';
+        }
+        
+        nameInput.addEventListener('input', updatePreview);
+        descriptionInput.addEventListener('input', updatePreview);
+    });
+</script>

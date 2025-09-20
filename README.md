@@ -1,4 +1,4 @@
-# ☕ Góc Phở - Website Bán Cafe Online
+# ☕ Góc Phố - Website Bán Cafe Online
 
 [![.NET](https://img.shields.io/badge/.NET-9.0-blue.svg)](https://dotnet.microsoft.com/download)
 [![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-9.0-green.svg)](https://docs.microsoft.com/aspnet/core)
@@ -7,7 +7,7 @@
 
 ## �� Tổng quan
 
-**Góc Phở** là một website bán cafe online được xây dựng bằng ASP.NET Core 9.0, cung cấp trải nghiệm mua sắm cafe trực tuyến với giao diện thân thiện và dễ sử dụng.
+**Góc Phố** là một website bán cafe online được xây dựng bằng ASP.NET Core 9.0, cung cấp trải nghiệm mua sắm cafe trực tuyến với giao diện thân thiện và dễ sử dụng.
 
 ## ✨ Tính năng chính
 
@@ -217,7 +217,6 @@ dotnet ef database update
 
 ##  Changelog
 
-### Version 1.0.0 (09/01/2025)
 - ✅ Khởi tạo dự án ASP.NET Core 9.0
 - ✅ Tích hợp ASP.NET Identity
 - ✅ Thiết kế database với Entity Framework Core
@@ -241,9 +240,9 @@ Dự án này được phân phối dưới MIT License. Xem file `LICENSE` đ�
 ## 👨‍ Tác giả
 
 **Nguyễn Văn Vũ Linh**
-- Email: [your-email@example.com]
-- GitHub: [@your-username]
-
+- Email: linhnvv210892@sv-onuni.edu.vn
+- GitHub: https://github.com/nvvlinh210892/ASPNET-DT23TTC11-nguyenvanvulinh-cafe
+- Điện thoại : 0975720128
 ## 📞 Hỗ trợ
 
 Nếu bạn gặp vấn đề hoặc có câu hỏi, vui lòng:
@@ -259,7 +258,7 @@ Nếu bạn gặp vấn đề hoặc có câu hỏi, vui lòng:
 
 ---
 
-**Góc Phở** - Nơi hương vị cafe được tôn vinh! ☕✨
+**Góc Phố** - Nơi hương vị cafe được tôn vinh! ☕✨
 ```
 
 Tôi đã tạo file README.md chi tiết cho dự án cafe Góc Phở của bạn. File này bao gồm:

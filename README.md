@@ -63,7 +63,51 @@
 - Visual Studio 2022 hoặc VS Code
 - Git
 
-### Các bước cài đặt
+### 📥 Cài đặt phần mềm cần thiết
+
+1. **Tải và cài đặt Visual Studio 2022:**
+   - Truy cập: https://visualstudio.microsoft.com/downloads/
+   - Chọn **Community** (miễn phí) hoặc **Professional/Enterprise**
+   - Trong quá trình cài đặt, chọn workload **"ASP.NET and web development"**
+
+2. **Cài đặt .NET 9.0 SDK:**
+   - Truy cập: https://dotnet.microsoft.com/download/dotnet/9.0
+   - Tải và cài đặt **.NET 9.0 SDK**
+
+### 🖥️ Chạy dự án trên Visual Studio
+
+1. **Mở dự án:**
+   - Mở **Visual Studio 2022**
+   - **File** → **Open** → **Project/Solution**
+   - Điều hướng đến thư mục dự án
+   - Chọn file **`GocPho.csproj`** → **Open**
+
+2. **Restore NuGet Packages:**
+   - Click chuột phải vào **Solution** trong **Solution Explorer**
+   - Chọn **Restore NuGet Packages**
+   - Hoặc: **Tools** → **NuGet Package Manager** → **Package Manager Console**
+   - Chạy lệnh: `dotnet restore`
+
+3. **Build dự án:**
+   - Click chuột phải vào project **GocPho**
+   - Chọn **Build** hoặc **Rebuild**
+   - Hoặc sử dụng phím tắt: **Ctrl + Shift + B**
+
+4. **Cập nhật Database:**
+   - Mở **Package Manager Console** (Tools → NuGet Package Manager → Package Manager Console)
+   - Chạy lệnh: `Update-Database`
+
+5. **Chạy ứng dụng:**
+   - **Cách 1:** Click nút **▶️ IIS Express** (màu xanh) trên thanh toolbar
+   - **Cách 2:** Click chuột phải vào project → **Debug** → **Start New Instance**
+   - **Cách 3:** Sử dụng phím tắt **F5** (Debug) hoặc **Ctrl + F5** (Run without debugging)
+
+6. **Truy cập website:**
+   - Visual Studio sẽ tự động mở trình duyệt
+   - **HTTP:** `http://localhost:5198/`
+   - **HTTPS:** `https://localhost:7102/`
+
+### 💻 Chạy dự án bằng Command Line
 
 1. **Clone repository**
    ```bash
